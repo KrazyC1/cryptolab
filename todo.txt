@@ -2,3 +2,6 @@ I have an idea for a program i'd like to make. The idea I had was to build a web
 
 Cloudflare pages to host site
 Cloudflare web worker to handle code
+
+
+write me a web app where I have html as the front end and javascript as the backend. I want the web app to have a panel on the left side of the screen where the user can drag and drop blocks onto the canvas (right side of the screen where the panel isn't). The panel should include 5 different colored blocks the user can choose from.
