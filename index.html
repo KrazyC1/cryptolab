@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Drag and Drop Web App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop Blocks</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="sidebar">
-    <div class="block red" draggable="true"></div>
-    <div class="block green" draggable="true"></div>
-    <div class="block blue" draggable="true"></div>
-    <div class="block yellow" draggable="true"></div>
-    <div class="block purple" draggable="true"></div>
-  </div>
-  <div class="canvas">
+  <div class="container">
+    <div class="palette">
+      <div class="block" style="background-color: red;"></div>
+      <div class="block" style="background-color: green;"></div>
+      <div class="block" style="background-color: blue;"></div>
+      <div class="block" style="background-color: rgb(211, 214, 16);"></div>
+      <div class="block" style="background-color: purple;"></div>
+    </div>
+    <div class="canvas"></div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

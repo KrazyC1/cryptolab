@@ -1,7 +1,1 @@
-I have an idea for a program i'd like to make. The idea I had was to build a web app that allows you to place and connect various blocks that perform different cryptographic functionality. With this idea I could create the encryption side of AES for example. I could also create the decryption side and pipe the ciphertext over for it to be handled properly, also allowing the user to enter in values for test input. I want the web app functionality to take place entirely within the app itself on the user's machine, I do not want to have the user making requests to an external server to run the code. I am thinking HTML/React for the front end and javascript for the backend. I want the different parts of the program to be seperate files for ease of editing it later.
-
-Cloudflare pages to host site
-Cloudflare web worker to handle code
-
-
-write me a web app where I have html as the front end and javascript as the backend. I want the web app to have a panel on the left side of the screen where the user can drag and drop blocks onto the canvas (right side of the screen where the panel isn't). The panel should include 5 different colored blocks the user can choose from.
+make me a simple web app using html/css as the front end (index.html and style.css) and javascript as the backend (script.js) that allows users to select and drag various different colored blocks (almost like a palette) on the left side of the screen (within a panel) and place different colored blocks on screen. Please utilize as many libraries as you can to make it simpler

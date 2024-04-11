@@ -1,74 +1,62 @@
-const canvas = document.querySelector('.canvas');
+document.addEventListener("DOMContentLoaded", function() {
+  const palette = document.querySelector(".palette");
+  const canvas = document.querySelector(".canvas");
 
-let draggingBlock = null;
-let isDragging = false;
+  // Create draggable blocks
+  const blocks = document.querySelectorAll(".block");
+  blocks.forEach(block => {
+    interact(block)
+      .draggable({
+        inertia: true,
+        modifiers: [
+          interact.modifiers.restrictRect({
+            restriction: "parent",
+            endOnly: true
+          })
+        ],
+        autoScroll: true,
+        listeners: {
+          move: dragMoveListener
+        }
+      })
+      .on("dragend", function(event) {
+        const x = (parseFloat(event.target.getAttribute("data-x")) || 0) + event.dx;
+        const y = (parseFloat(event.target.getAttribute("data-y")) || 0) + event.dy;
 
-canvas.addEventListener('dragover', dragOver);
-canvas.addEventListener('drop', drop);
-canvas.addEventListener('mousedown', mouseDown);
-canvas.addEventListener('mousemove', mouseMove);
-canvas.addEventListener('mouseup', mouseUp);
+        event.target.style.transform = `translate(${x}px, ${y}px)`;
+        event.target.setAttribute("data-x", x);
+        event.target.setAttribute("data-y", y);
 
-function dragStart(e) {
-  const isBlockInSidebar = e.currentTarget.parentNode.classList.contains('sidebar');
-  if (isBlockInSidebar) {
-    e.dataTransfer.setData('text/plain', e.currentTarget.classList[1]);
-    draggingBlock = e.currentTarget;
-    e.currentTarget.classList.add('dragging');
+        // Add the block to the canvas
+        const newBlock = event.target.cloneNode(true);
+        newBlock.classList.add("draggable-block");
+        canvas.appendChild(newBlock);
+
+        // Make the new block draggable
+        interact(newBlock)
+          .draggable({
+            inertia: true,
+            modifiers: [
+              interact.modifiers.restrictRect({
+                restriction: "parent",
+                endOnly: true
+              })
+            ],
+            autoScroll: true,
+            listeners: {
+              move: dragMoveListener
+            }
+          });
+      });
+  });
+
+  function dragMoveListener(event) {
+    const target = event.target;
+    const x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
+    const y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
+
+    target.style.transform = `translate(${x}px, ${y}px)`;
+    target.setAttribute("data-x", x);
+    target.setAttribute("data-y", y);
   }
-}
-
-function dragEnd(e) {
-  e.currentTarget.classList.remove('dragging');
-  draggingBlock = null;
-}
-
-function dragOver(e) {
-  e.preventDefault();
-}
-
-function drop(e) {
-  e.preventDefault();
-  if (e.dataTransfer.getData('text/plain')) {
-    const blockClass = e.dataTransfer.getData('text/plain');
-    const block = document.createElement('div');
-    block.classList.add('block', blockClass);
-    block.style.left = e.clientX - canvas.offsetLeft - 40 + 'px';
-    block.style.top = e.clientY - canvas.offsetTop - 40 + 'px';
-    block.setAttribute('draggable', 'true');
-    block.addEventListener('dragstart', dragStart);
-    block.addEventListener('dragend', dragEnd);
-    canvas.appendChild(block);
-  }
-}
-
-function mouseDown(e) {
-  const block = e.target.closest('.block');
-  if (block && block.parentNode === canvas) {
-    draggingBlock = block;
-    block.classList.add('dragging');
-    block.style.zIndex = '999';
-    isDragging = true;
-  }
-}
-
-function mouseMove(e) {
-  if (isDragging && draggingBlock) {
-    draggingBlock.style.left = e.clientX - canvas.offsetLeft - 40 + 'px';
-    draggingBlock.style.top = e.clientY - canvas.offsetTop - 40 + 'px';
-  }
-}
-
-function mouseUp(e) {
-  if (isDragging && draggingBlock) {
-    draggingBlock.classList.remove('dragging');
-    draggingBlock.style.zIndex = 'auto';
-    draggingBlock = null;
-    isDragging = false;
-  }
-}
-
-document.querySelectorAll('.sidebar .block').forEach(block => {
-  block.addEventListener('dragstart', dragStart);
-  block.addEventListener('dragend', dragEnd);
 });
