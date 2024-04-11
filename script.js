@@ -16,7 +16,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Make the new block draggable
     interact(newBlock)
       .draggable({
-        inertia: true,
+        inertia: {
+          resistance: 30, // Adjust this value to control the inertia
+          minSpeed: 200, // Minimum speed required to start inertial movement
+          endSpeed: 100 // Speed at which inertial movement will stop
+        },
         modifiers: [
           interact.modifiers.restrictRect({
             restriction: "parent",
