@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
     interact(newBlock)
       .draggable({
         inertia: {
-          resistance: 30, // Adjust this value to control the inertia
-          minSpeed: 200, // Minimum speed required to start inertial movement
-          endSpeed: 100 // Speed at which inertial movement will stop
+          resistance: 30,
+          minSpeed: 200,
+          endSpeed: 100
         },
         modifiers: [
           interact.modifiers.restrictRect({
@@ -81,18 +81,19 @@ document.addEventListener("DOMContentLoaded", function() {
       canvas.appendChild(wire);
 
       // Update the wire's size and position
-      const dx = selectedOutputPoint.offsetLeft - selectedInputPoint.offsetLeft;
-      const dy = selectedOutputPoint.offsetTop - selectedInputPoint.offsetTop;
+      const inputRect = selectedInputPoint.getBoundingClientRect();
+      const outputRect = selectedOutputPoint.getBoundingClientRect();
+      const dx = outputRect.left - inputRect.left;
+      const dy = outputRect.top - inputRect.top;
       const distance = Math.sqrt(dx * dx + dy * dy);
       wire.style.width = `${distance}px`;
-      wire.style.transform = `translate(${selectedInputPoint.offsetLeft}px, ${selectedInputPoint.offsetTop}px) rotate(${Math.atan2(dy, dx)}rad)`;
+      wire.style.transform = `translate(${inputRect.left}px, ${inputRect.top}px) rotate(${Math.atan2(dy, dx)}rad)`;
 
       // Hide the input and output points
       selectedInputPoint.style.display = "none";
       selectedOutputPoint.style.display = "none";
       inputPoints.forEach(point => (point.style.display = "none"));
       outputPoints.forEach(point => (point.style.display = "none"));
-
       selectedInputPoint = null;
       selectedOutputPoint = null;
     }
