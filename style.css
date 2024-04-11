@@ -33,3 +33,43 @@ body {
 .palette .block {
   cursor: pointer;
 }
+
+.create-wire-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.input-point {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: blue;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.output-point {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  transform: translate(150%, -50%);
+  cursor: pointer;
+}
+
+.wire {
+  position: absolute;
+  background-color: black;
+  width: 0;
+  height: 2px;
+}
