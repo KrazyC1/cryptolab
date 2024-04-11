@@ -1,47 +1,74 @@
-// Get all the blocks
-var blocks = document.querySelectorAll('.block');
+const canvas = document.querySelector('.canvas');
 
-// Make the blocks draggable
-blocks.forEach(function(block) {
-  var initialX, initialY, currentX, currentY, xOffset = 0, yOffset = 0, active = false;
+let draggingBlock = null;
+let isDragging = false;
 
-  block.addEventListener('mousedown', dragStart);
-  block.addEventListener('mouseup', dragEnd);
-  block.addEventListener('mousemove', drag);
+canvas.addEventListener('dragover', dragOver);
+canvas.addEventListener('drop', drop);
+canvas.addEventListener('mousedown', mouseDown);
+canvas.addEventListener('mousemove', mouseMove);
+canvas.addEventListener('mouseup', mouseUp);
 
-  function dragStart(e) {
-    initialX = e.clientX - xOffset;
-    initialY = e.clientY - yOffset;
-
-    if (e.target === block) {
-      active = true;
-    }
+function dragStart(e) {
+  const isBlockInSidebar = e.currentTarget.parentNode.classList.contains('sidebar');
+  if (isBlockInSidebar) {
+    e.dataTransfer.setData('text/plain', e.currentTarget.classList[1]);
+    draggingBlock = e.currentTarget;
+    e.currentTarget.classList.add('dragging');
   }
+}
 
-  function dragEnd(e) {
-    initialX = currentX;
-    initialY = currentY;
+function dragEnd(e) {
+  e.currentTarget.classList.remove('dragging');
+  draggingBlock = null;
+}
 
-    active = false;
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function drop(e) {
+  e.preventDefault();
+  if (e.dataTransfer.getData('text/plain')) {
+    const blockClass = e.dataTransfer.getData('text/plain');
+    const block = document.createElement('div');
+    block.classList.add('block', blockClass);
+    block.style.left = e.clientX - canvas.offsetLeft - 40 + 'px';
+    block.style.top = e.clientY - canvas.offsetTop - 40 + 'px';
+    block.setAttribute('draggable', 'true');
+    block.addEventListener('dragstart', dragStart);
+    block.addEventListener('dragend', dragEnd);
+    canvas.appendChild(block);
   }
+}
 
-  function drag(e) {
-    if (active) {
-      e.preventDefault();
-
-      if (e.type === 'mousemove') {
-        currentX = e.clientX - initialX;
-        currentY = e.clientY - initialY;
-
-        xOffset = currentX;
-        yOffset = currentY;
-
-        setTranslate(currentX, currentY, block);
-      }
-    }
+function mouseDown(e) {
+  const block = e.target.closest('.block');
+  if (block && block.parentNode === canvas) {
+    draggingBlock = block;
+    block.classList.add('dragging');
+    block.style.zIndex = '999';
+    isDragging = true;
   }
+}
 
-  function setTranslate(xPos, yPos, el) {
-    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+function mouseMove(e) {
+  if (isDragging && draggingBlock) {
+    draggingBlock.style.left = e.clientX - canvas.offsetLeft - 40 + 'px';
+    draggingBlock.style.top = e.clientY - canvas.offsetTop - 40 + 'px';
   }
+}
+
+function mouseUp(e) {
+  if (isDragging && draggingBlock) {
+    draggingBlock.classList.remove('dragging');
+    draggingBlock.style.zIndex = 'auto';
+    draggingBlock = null;
+    isDragging = false;
+  }
+}
+
+document.querySelectorAll('.sidebar .block').forEach(block => {
+  block.addEventListener('dragstart', dragStart);
+  block.addEventListener('dragend', dragEnd);
 });
