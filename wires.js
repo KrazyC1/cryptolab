@@ -1,3 +1,4 @@
+// wires.js
 document.addEventListener("DOMContentLoaded", function() {
   const canvas = document.querySelector(".canvas");
   const createWireBtn = document.querySelector(".create-wire-btn");
@@ -9,33 +10,31 @@ document.addEventListener("DOMContentLoaded", function() {
   createWireBtn.addEventListener("click", () => {
     const blocks = document.querySelectorAll(".draggable-block");
     blocks.forEach((block) => {
-      // Create input point
-      const inputPoint = document.createElement("div");
-      inputPoint.classList.add("input-point");
-      inputPoint.addEventListener("click", () => {
-        // Check if there's an input triangle present
-        const inputTriangle = block.querySelector(".input-triangle");
-        if (!inputTriangle) {
+      // Check if there's already an input triangle
+      if (!block.querySelector(".input-triangle")) {
+        // Create input point
+        const inputPoint = document.createElement("div");
+        inputPoint.classList.add("input-point");
+        inputPoint.addEventListener("click", () => {
           selectedInputPoint = inputPoint;
           console.log("Selected input point");
-        }
-      });
-      block.appendChild(inputPoint);
-      inputPoints.push(inputPoint);
-
-      // Create output point
-      const outputPoint = document.createElement("div");
-      outputPoint.classList.add("output-point");
-      outputPoint.addEventListener("click", () => {
-        // Check if there's an output triangle present
-        const outputTriangle = block.querySelector(".output-triangle");
-        if (!outputTriangle) {
+        });
+        block.appendChild(inputPoint);
+        inputPoints.push(inputPoint);
+      }
+  
+      // Check if there's already an output triangle
+      if (!block.querySelector(".output-triangle")) {
+        // Create output point
+        const outputPoint = document.createElement("div");
+        outputPoint.classList.add("output-point");
+        outputPoint.addEventListener("click", () => {
           selectedOutputPoint = outputPoint;
           console.log("Selected output point");
-        }
-      });
-      block.appendChild(outputPoint);
-      outputPoints.push(outputPoint);
+        });
+        block.appendChild(outputPoint);
+        outputPoints.push(outputPoint);
+      }
     });
   });
 
