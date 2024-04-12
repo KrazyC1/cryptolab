@@ -50,6 +50,17 @@ document.addEventListener("DOMContentLoaded", function() {
       wire.style.top = `${inputRect.top + inputRect.height / 2 + window.scrollY}px`;
       wire.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
 
+      // Create the input and output triangles
+      const inputTriangle = document.createElement("div");
+      inputTriangle.classList.add("input-triangle");
+      inputTriangle.style.borderTopColor = "blue";
+      selectedInputPoint.parentNode.appendChild(inputTriangle);
+
+      const outputTriangle = document.createElement("div");
+      outputTriangle.classList.add("output-triangle");
+      outputTriangle.style.borderBottomColor = "red";
+      selectedOutputPoint.parentNode.appendChild(outputTriangle);
+
       // Hide the input and output points
       selectedInputPoint.style.display = "none";
       selectedOutputPoint.style.display = "none";

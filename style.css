@@ -78,3 +78,29 @@ body {
   height: 2px;
   transform-origin: left;
 }
+
+.input-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 20px solid;
+  border-bottom: 10px solid transparent;
+  color: blue;
+  left: 50%;
+  top: -10px;
+  transform: translateX(-50%);
+}
+
+.output-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-left: 20px solid;
+  border-bottom: 10px solid transparent;
+  color: red;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+}
