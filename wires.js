@@ -42,12 +42,12 @@ document.addEventListener("DOMContentLoaded", function() {
       // Update the wire's size and position
       const inputRect = selectedInputPoint.getBoundingClientRect();
       const outputRect = selectedOutputPoint.getBoundingClientRect();
-      const dx = outputRect.left - inputRect.left;
-      const dy = outputRect.top - inputRect.top;
+      const dx = outputRect.left + outputRect.width / 2 - (inputRect.left + inputRect.width / 2);
+      const dy = outputRect.top + outputRect.height / 2 - (inputRect.top + inputRect.height / 2);
       const distance = Math.sqrt(dx * dx + dy * dy);
       wire.style.width = `${distance}px`;
-      wire.style.left = `${inputRect.left + window.pageXOffset}px`;
-      wire.style.top = `${inputRect.top + window.pageYOffset}px`;
+      wire.style.left = `${inputRect.left + inputRect.width / 2 + window.scrollX}px`;
+      wire.style.top = `${inputRect.top + inputRect.height / 2 + window.scrollY}px`;
       wire.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
 
       // Hide the input and output points

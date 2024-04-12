@@ -23,6 +23,7 @@ body {
   height: 50px;
   margin: 10px;
   cursor: move;
+  position: relative;
 }
 
 .canvas {
@@ -53,7 +54,9 @@ body {
   height: 10px;
   background-color: blue;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  left: 50%;
+  top: -5px;
+  transform: translateX(-50%);
   cursor: pointer;
 }
 
@@ -63,7 +66,9 @@ body {
   height: 10px;
   background-color: red;
   border-radius: 50%;
-  transform: translate(150%, -50%);
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
   cursor: pointer;
 }
 
