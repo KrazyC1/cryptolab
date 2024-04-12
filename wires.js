@@ -1,4 +1,3 @@
-// wires.js
 document.addEventListener("DOMContentLoaded", function() {
   const canvas = document.querySelector(".canvas");
   const createWireBtn = document.querySelector(".create-wire-btn");
@@ -14,8 +13,12 @@ document.addEventListener("DOMContentLoaded", function() {
       const inputPoint = document.createElement("div");
       inputPoint.classList.add("input-point");
       inputPoint.addEventListener("click", () => {
-        selectedInputPoint = inputPoint;
-        console.log("Selected input point");
+        // Check if there's an input triangle present
+        const inputTriangle = block.querySelector(".input-triangle");
+        if (!inputTriangle) {
+          selectedInputPoint = inputPoint;
+          console.log("Selected input point");
+        }
       });
       block.appendChild(inputPoint);
       inputPoints.push(inputPoint);
@@ -24,8 +27,12 @@ document.addEventListener("DOMContentLoaded", function() {
       const outputPoint = document.createElement("div");
       outputPoint.classList.add("output-point");
       outputPoint.addEventListener("click", () => {
-        selectedOutputPoint = outputPoint;
-        console.log("Selected output point");
+        // Check if there's an output triangle present
+        const outputTriangle = block.querySelector(".output-triangle");
+        if (!outputTriangle) {
+          selectedOutputPoint = outputPoint;
+          console.log("Selected output point");
+        }
       });
       block.appendChild(outputPoint);
       outputPoints.push(outputPoint);
