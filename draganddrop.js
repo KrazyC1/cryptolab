@@ -1,5 +1,6 @@
 // draganddrop.js
 document.addEventListener("DOMContentLoaded", function() {
+  // draganddrop.js
   function dragMoveListener(event) {
     const target = event.target;
     const x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;
@@ -7,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
     target.style.transform = `translate(${x}px, ${y}px)`;
     target.setAttribute("data-x", x);
     target.setAttribute("data-y", y);
+
+    // Call updateWires function
+    updateWires();
   }
 
   function makeDraggable(element) {
