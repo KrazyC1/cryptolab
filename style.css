@@ -70,6 +70,6 @@ body {
 .wire {
   position: absolute;
   background-color: black;
-  width: 0;
   height: 2px;
+  transform-origin: left;
 }

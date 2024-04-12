@@ -46,7 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
       const dy = outputRect.top - inputRect.top;
       const distance = Math.sqrt(dx * dx + dy * dy);
       wire.style.width = `${distance}px`;
-      wire.style.transform = `translate(${inputRect.left}px, ${inputRect.top}px) rotate(${Math.atan2(dy, dx)}rad)`;
+      wire.style.left = `${inputRect.left + window.pageXOffset}px`;
+      wire.style.top = `${inputRect.top + window.pageYOffset}px`;
+      wire.style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
 
       // Hide the input and output points
       selectedInputPoint.style.display = "none";
