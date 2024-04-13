@@ -1,5 +1,5 @@
-```blocks.js: This file handles the addition of new blocks to the canvas. 
-It listens for clicks on the palette blocks and adds a new draggable block to the canvas.```
+/*blocks.js: This file handles the addition of new blocks to the canvas. 
+It listens for clicks on the palette blocks and adds a new draggable block to the canvas. */
 document.addEventListener("DOMContentLoaded", function() {
   const palette = document.querySelector(".palette");
   const canvas = document.querySelector(".canvas");
