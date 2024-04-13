@@ -1,6 +1,7 @@
-// draganddrop.js
+``` draganddrop.js: This file handles the drag and drop functionality of the blocks using the
+ interact.js library. It defines a dragMoveListener function that updates the position of the
+  dragged element and calls the updateWires function.```
 document.addEventListener("DOMContentLoaded", function() {
-  // draganddrop.js
   function dragMoveListener(event) {
     const target = event.target;
     const x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx;

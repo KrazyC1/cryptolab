@@ -1,4 +1,5 @@
-// updateWires.js
+```updateWires.js: This file defines the updateWires function, which updates the position
+ and appearance of the wires connecting the blocks based on the positions of the input and output triangles.```
 document.addEventListener("DOMContentLoaded", function() {
       function updateWires() {
         const wires = document.querySelectorAll(".wire");
