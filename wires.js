@@ -1,5 +1,5 @@
 /*This file handles the creation and removal of wires. It allows the user to select input and output
- points on the blocks and creates a wire between them. It also provides a function to remove wires by clicking on them.*/
+ points on the blocks and creates a wire between them. */
 document.addEventListener("DOMContentLoaded", function() {
   const canvas = document.querySelector(".canvas");
   const createWireBtn = document.querySelector(".create-wire-btn");
